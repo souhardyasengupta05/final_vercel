@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Dict, Any
 import math
+import os
 
 app = FastAPI()
 
@@ -12,14 +13,15 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
-    expose_headers=["*"] # important
+    expose_headers=["*"]
 )
 
 class LatencyRequest(BaseModel):
     regions: List[str]
     threshold_ms: float
 
-[
+# Telemetry data assigned to a variable
+TELEMETRY_DATA = [
   {
     "region": "apac",
     "service": "catalog",
